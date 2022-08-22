@@ -48,6 +48,8 @@ class Week extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
     public function current()
     {
@@ -57,7 +59,7 @@ class Week extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         if (!$this->valid()) {
             $this->current = $this->getFactory()->createDay($this->begin);
@@ -71,6 +73,8 @@ class Week extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -80,7 +84,7 @@ class Week extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return null !== $this->current;
     }
@@ -88,7 +92,7 @@ class Week extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->current = null;
         $this->next();
