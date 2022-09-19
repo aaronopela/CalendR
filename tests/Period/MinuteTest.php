@@ -2,6 +2,7 @@
 
 namespace CalendR\Test\Period;
 
+use CalendR\Period\Exception\NotAMinute;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Second;
@@ -48,10 +49,11 @@ class MinuteTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAMinute
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAMinute::class);
+
         new Minute($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

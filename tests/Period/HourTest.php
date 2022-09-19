@@ -2,6 +2,7 @@
 
 namespace CalendR\Test\Period;
 
+use CalendR\Period\Exception\NotAnHour;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Second;
@@ -33,10 +34,11 @@ class HourTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAnHour
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAnHour::class);
+
         new Hour($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

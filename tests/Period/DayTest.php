@@ -3,6 +3,7 @@
 namespace CalendR\Test\Period;
 
 use CalendR\Period\Day;
+use CalendR\Period\Exception\NotADay;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\PeriodInterface;
@@ -30,10 +31,11 @@ class DayTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotADay
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotADay::class);
+
         new Day($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

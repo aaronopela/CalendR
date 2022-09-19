@@ -2,6 +2,7 @@
 namespace CalendR\Test\Event;
 
 use CalendR\Event\Collection\Indexed;
+use CalendR\Event\Exception\NoProviderFound;
 use CalendR\Event\Manager;
 use CalendR\Event\Event;
 use CalendR\Period\Day;
@@ -80,11 +81,10 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \CalendR\Event\Exception\NoProviderFound
-     */
     public function testFindWithoutProvider()
     {
+        $this->expectException(NoProviderFound::class);
+
         $manager = new Manager;
         $manager->find(new Day(new \DateTime('00:00:00'), $this->prophesize(FactoryInterface::class)->reveal()));
     }

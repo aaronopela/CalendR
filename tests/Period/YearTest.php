@@ -4,6 +4,7 @@ namespace CalendR\Test\Period;
 
 use CalendR\Calendar;
 use CalendR\Period\Day;
+use CalendR\Period\Exception\NotAYear;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Year;
@@ -66,10 +67,11 @@ class YearTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAYear
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAYear::class);
+
         new Year($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 
