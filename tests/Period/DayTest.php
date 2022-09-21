@@ -9,9 +9,12 @@ use CalendR\Period\FactoryInterface;
 use CalendR\Period\PeriodInterface;
 use CalendR\Period\Year;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DayTest extends TestCase
 {
+    use ProphecyTrait;
+
     public static function providerConstructInvalid()
     {
         return array(
