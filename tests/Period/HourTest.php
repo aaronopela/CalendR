@@ -2,6 +2,7 @@
 
 namespace CalendR\Test\Period;
 
+use CalendR\Period\Exception\NotAnHour;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Second;
@@ -11,9 +12,12 @@ use CalendR\Period\Day;
 use CalendR\Period\PeriodInterface;
 use CalendR\Period\Year;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class HourTest extends TestCase
 {
+    use ProphecyTrait;
+
     public static function providerConstructInvalid()
     {
         return array(
@@ -33,10 +37,11 @@ class HourTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAnHour
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAnHour::class);
+
         new Hour($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

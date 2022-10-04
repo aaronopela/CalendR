@@ -36,7 +36,7 @@ interface EventInterface
      *
      * @abstract
      *
-     * @return \DateTime event begin
+     * @return \DateTime|null event begin
      */
     public function getBegin();
 
@@ -45,7 +45,7 @@ interface EventInterface
      *
      * @abstract
      *
-     * @return \DateTime event end
+     * @return \DateTime|null event end
      */
     public function getEnd();
 

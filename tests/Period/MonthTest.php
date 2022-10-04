@@ -3,13 +3,17 @@
 namespace CalendR\Test\Period;
 
 use CalendR\Period\Day;
+use CalendR\Period\Exception\NotAMonth;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Month;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class MonthTest extends TestCase
 {
+    use ProphecyTrait;
+
     public static function providerConstructInvalid()
     {
         return array(
@@ -80,10 +84,11 @@ class MonthTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAMonth
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAMonth::class);
+
         new Month($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

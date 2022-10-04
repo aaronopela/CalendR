@@ -4,13 +4,17 @@ namespace CalendR\Test\Period;
 
 use CalendR\Calendar;
 use CalendR\Period\Day;
+use CalendR\Period\Exception\NotAYear;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Year;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class YearTest extends TestCase
 {
+    use ProphecyTrait;
+
     public static function providerConstructInvalid()
     {
         return array(
@@ -66,10 +70,11 @@ class YearTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotAYear
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotAYear::class);
+
         new Year($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

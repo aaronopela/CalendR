@@ -2,6 +2,7 @@
 namespace CalendR\Test\Event;
 
 use CalendR\Event\Collection\Indexed;
+use CalendR\Event\Exception\NoProviderFound;
 use CalendR\Event\Manager;
 use CalendR\Event\Event;
 use CalendR\Period\Day;
@@ -9,6 +10,7 @@ use CalendR\Period\FactoryInterface;
 use CalendR\Period\Month;
 use CalendR\Event\Provider\Basic;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 /**
  * Test class for Manager.
@@ -16,6 +18,8 @@ use PHPUnit\Framework\TestCase;
  */
 class ManagerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var Manager
      */
@@ -25,7 +29,7 @@ class ManagerTest extends TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $basic1 = new Basic;
         $basic2 = new Basic;
@@ -80,11 +84,10 @@ class ManagerTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException \CalendR\Event\Exception\NoProviderFound
-     */
     public function testFindWithoutProvider()
     {
+        $this->expectException(NoProviderFound::class);
+
         $manager = new Manager;
         $manager->find(new Day(new \DateTime('00:00:00'), $this->prophesize(FactoryInterface::class)->reveal()));
     }

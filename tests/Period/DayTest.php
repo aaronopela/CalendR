@@ -3,14 +3,18 @@
 namespace CalendR\Test\Period;
 
 use CalendR\Period\Day;
+use CalendR\Period\Exception\NotADay;
 use CalendR\Period\Factory;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\PeriodInterface;
 use CalendR\Period\Year;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class DayTest extends TestCase
 {
+    use ProphecyTrait;
+
     public static function providerConstructInvalid()
     {
         return array(
@@ -30,10 +34,11 @@ class DayTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotADay
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotADay::class);
+
         new Day($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

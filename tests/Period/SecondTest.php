@@ -2,6 +2,7 @@
 
 namespace CalendR\Test\Period;
 
+use CalendR\Period\Exception\NotASecond;
 use CalendR\Period\FactoryInterface;
 use CalendR\Period\Second;
 use CalendR\Period\Minute;
@@ -10,9 +11,11 @@ use CalendR\Period\Day;
 use CalendR\Period\PeriodInterface;
 use CalendR\Period\Year;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class SecondTest extends TestCase
 {
+    use ProphecyTrait;
 
     /**
      * Data Provider: Valid Constructor
@@ -60,10 +63,11 @@ class SecondTest extends TestCase
 
     /**
      * @dataProvider providerConstructInvalid
-     * @expectedException \CalendR\Period\Exception\NotASecond
      */
     public function testConstructInvalid($start)
     {
+        $this->expectException(NotASecond::class);
+
         new Second($start, $this->prophesize(FactoryInterface::class)->reveal());
     }
 

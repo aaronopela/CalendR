@@ -90,7 +90,7 @@ class Month extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         if (!$this->valid()) {
             $this->current = $this->getFactory()->createWeek($this->getFirstDayOfFirstWeek());
@@ -105,6 +105,8 @@ class Month extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
     public function key()
     {
@@ -114,7 +116,7 @@ class Month extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return null !== $this->current();
     }
@@ -122,7 +124,7 @@ class Month extends PeriodAbstract implements \Iterator
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->current = null;
         $this->next();
