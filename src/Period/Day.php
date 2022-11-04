@@ -75,10 +75,8 @@ class Day extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->current;
     }
@@ -100,10 +98,8 @@ class Day extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
-    public function key()
+    public function key(): mixed
     {
         return (int) $this->current->getBegin()->format('G');
     }
