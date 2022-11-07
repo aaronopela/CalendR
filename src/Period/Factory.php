@@ -117,10 +117,8 @@ class Factory implements FactoryInterface
 
     /**
      * @param string $name
-     *
-     * @return mixed
      */
-    public function getOption($name)
+    public function getOption($name): mixed
     {
         return $this->options[$name];
     }

@@ -48,10 +48,8 @@ class Week extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->current;
     }
@@ -73,10 +71,8 @@ class Week extends PeriodAbstract implements \Iterator
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->current->getBegin()->format('d-m-Y');
     }

@@ -38,42 +38,27 @@ class CalendRExtension extends \Twig_Extension
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getYear()
+    public function getYear(): mixed
     {
         return call_user_func_array([$this->factory, 'getYear'], func_get_args());
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMonth()
+    public function getMonth(): mixed
     {
         return call_user_func_array([$this->factory, 'getMonth'], func_get_args());
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWeek()
+    public function getWeek(): mixed
     {
         return call_user_func_array([$this->factory, 'getWeek'], func_get_args());
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDay()
+    public function getDay(): mixed
     {
         return call_user_func_array([$this->factory, 'getDay'], func_get_args());
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEvents()
+    public function getEvents(): mixed
     {
         return call_user_func_array([$this->factory, 'getEvents'], func_get_args());
     }
