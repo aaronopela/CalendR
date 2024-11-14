@@ -18,17 +18,17 @@ class EventRepositoryTest extends TestCase
     protected $repo;
 
     /**
-     * @var MockObject|EntityManagerInterface
+     * @var MockObject&EntityManagerInterface
      */
     protected $em;
 
     /**
-     * @var MockObject|ClassMetadata
+     * @var MockObject&ClassMetadata
      */
     protected $classMetadata;
 
     /**
-     * @var MockObject|QueryBuilder
+     * @var MockObject&QueryBuilder
      */
     protected $qb;
 
@@ -36,6 +36,7 @@ class EventRepositoryTest extends TestCase
     {
         $this->em            = $this->getMockBuilder(EntityManagerInterface::class)->getMock();
         $this->classMetadata = $this->getMockBuilder(ClassMetadata::class)->disableOriginalConstructor()->getMock();
+        $this->classMetadata->name = 'MetaDataStub';
         $this->qb            = $this->getMockBuilder(QueryBuilder::class)->disableOriginalConstructor()->getMock();
         $this->repo          = new EventRepository($this->em, $this->classMetadata);
     }
@@ -62,7 +63,7 @@ class EventRepositoryTest extends TestCase
     public function testGetEvents($begin, $end, array $providedEvents)
     {
         $expr  = $this->getMockBuilder('Doctrine\ORM\Query\Expr')->getMock();
-        $query = $this->getMockBuilder('Doctrine\ORM\AbstractQuery')
+        $query = $this->getMockBuilder('Doctrine\ORM\Query')
                       ->disableOriginalConstructor()
                       ->setMethods(['_doExecute', 'getSQL', 'execute', 'getResult'])
                       ->getMock();
